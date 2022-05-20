@@ -11,19 +11,17 @@ We established the following criteria to select projects that match the requirem
 compliant with OSI (Open-Source Initiative) or FSF (Free Software Foundation) licensing;
 * **Non-forked projects.** We removed the forked projects because they contain excerpts of code similar to the original ones, which return similar values in the data extraction, biasing the results.
 * **Projects that use Java as the primary programming language.** Besides the initial list contains projects that use Java as the primary programming language, the projects evolved since the GitHub mining. Therefore, we checked whether the projects continue using Java as a primary language. 
-* **Projects that contain tests matching the production classes.** We selected the projects that have test classes. Even more, as different packages can have classes with the same name, we added a constraint that the test classes and production classes should be at the same hierarchical level in the project. It helps the static analysis to match the test classes with their respective production classes. 
-The list of selected projects is available at ```selected_projects.txt```. 
 
 
 ### (3) Data extraction
-We developed the ```JAVA``` to collect the following data of the projects:
+We developed an script to collect the following data of the projects:
 * **Test Smells.** We used the [JNose Test](https://jnosetest.github.io/) to collect data of test smells in the test code. 
 * **Structural metrics.** We used the [CK Metrics](https://github.com/mauricioaniche/ck) to collect structural metrics from the test and production code.
 * **Metadata from GitHub.** We used the [GHRepository](https://github-api.kohsuke.org/apidocs/index.html) to collect the metadata of the projects sucessfully executed by JNose Test and CK Metrics. 
 
-Next, we developed the ```MERGE``` to merge the test smells and metrics. We analyzed the collected data at class and method levels to establish a traceability link between the JNose Test and CK Metrics tools. It is important to notice that not all production classes of a project match with their respective test class, and the same occurs at the method level. We followed the JUnit naming convention of either pre-pending or appending the word ``Test`` to the name of the production class at the same level at the package hierarchy. For example, a production class in the package ``/src/java/example/``is called ``ExampleName.java``, so its test class should be in the package ``/src/test/example`` and named as ``ExampleNameTest.java`` or ``TestExampleName.java``.
+Next, we developed merged the test smells and metrics. We analyzed the collected data at class and method levels to establish a traceability link between the JNose Test and CK Metrics tools. It is important to notice that not all production classes of a project match with their respective test class, and the same occurs at the method level. We followed the JUnit naming convention of either pre-pending or appending the word ``Test`` to the name of the production class at the same level at the package hierarchy. For example, a production class in the package ``/src/java/example/``is called ``ExampleName.java``, so its test class should be in the package ``/src/test/example`` and named as ``ExampleNameTest.java`` or ``TestExampleName.java``.
 
-We made the files containing the data on test smells and metrics available in the folder ```JSet```. It is structured as follows:
+We made the files containing the data on test smells and metrics available in the folder ```TSSM```. It is structured as follows:
 
 ```
 JSet
